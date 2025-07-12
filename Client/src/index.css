@@ -1,0 +1,264 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root {
+  height: 100%;
+}
+
+nav {
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 25rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+  color: #007bff;
+}
+
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.navbar-toggle .bar {
+  height: 3px;
+  width: 25px;
+  background-color: #333;
+  border-radius: 2px;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+  padding-inline: 1rem;
+}
+
+.center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box {
+  min-width: 25rem;
+  padding: 1rem;
+  border: rgba(128, 128, 128, 0.377) solid 0.25rem;
+  border-radius: 0.75rem;
+}
+
+.heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  color: gray;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+form label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"] {
+  margin-left: 0.2rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+  background-color: #004080;
+}
+
+button.secondary {
+  background-color: #e0e6ed;
+  color: #333;
+  border: 1px solid #c2c8d0;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+button.secondary:hover {
+  background-color: #d5dce5;
+  border-color: #aab3bd;
+}
+
+button.secondary:focus {
+  outline: 2px solid #7aa4ff;
+  outline-offset: 2px;
+}
+
+.auth {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0;
+  text-align: center;
+}
+
+.auth a {
+  color: #007bff;
+  text-decoration: none;
+  margin-left: 0.4rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.auth a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.imguser {
+  width: 15rem;
+  height: auto;
+}
+
+.griduser {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  padding: 16px;
+  gap: 12px 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  font-size: 1.3rem;
+}
+
+.griduser label {
+  font-weight: 600;
+  color: #3a3a3a;
+}
+
+.griduser h3 {
+  color: #1a1a1a;
+  font-weight: normal;
+}
+
+@media (max-width: 1300px) {
+  nav {
+    padding: 1rem 10rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .box {
+    min-width: 20rem;
+  }
+  nav {
+    padding: 1rem 2rem;
+  }
+  .navbar-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background-color: #0000002c;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    display: none;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .box {
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+}
