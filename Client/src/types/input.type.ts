@@ -1,8 +1,16 @@
+import type { ChangeEvent } from "react";
+
 export interface InputType {
   heading?: string;
   value: string;
   type?: string;
   placeholder: string;
-  cname?: string;
-  onchange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onchange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface SelecType {
+  heading?: string;
+  value: string;
+  options:string[];
+  onchange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }

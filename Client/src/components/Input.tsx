@@ -10,9 +10,10 @@ function Input({
 }: InputType) {
   return (
     <div className="form-group">
-      <label >{heading}</label>
+      <label>{heading}</label>
       <input
         type={type}
+        className="inp"
         value={value}
         placeholder={placeholder}
         onChange={onchange}

@@ -1,8 +1,9 @@
 import { Server } from "socket.io";
 
-const Sockethandler = (server) => {
-  console.info("run");
-  const io = new Server(server, {
+let io = null;
+
+const socketHandler = (server) => {
+  io = new Server(server, {
     cors: {
       origin: process.env.ORIGIN_URL,
     },
@@ -12,4 +13,9 @@ const Sockethandler = (server) => {
   });
 };
 
-export default Sockethandler;
+const getio = () => {
+  if (!io) throw new Error("Socket.io not initialized");
+  return io;
+};
+
+export { socketHandler, getio };

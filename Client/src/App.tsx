@@ -3,6 +3,7 @@ import Home from "./Pages/Home";
 import Authform from "./Pages/Authform";
 import Layout from "./Layout/Layout";
 import Account from "./Pages/Account";
+import Addtask from "./Pages/Addtask";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/add-task" element={<Addtask />} />
         </Route>
       </Routes>
     </BrowserRouter>

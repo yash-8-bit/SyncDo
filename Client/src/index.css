@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +15,9 @@ body {
 #root {
   height: 100%;
 }
-
+.font {
+  font-family: "Funnel Display", sans-serif;
+}
 nav {
   border-bottom: 1px solid #eaeaea;
   display: flex;
@@ -40,7 +44,6 @@ nav {
 .navbar-links a {
   text-decoration: none;
   color: #333;
-  font-weight: 500;
   transition: color 0.3s;
 }
 
@@ -67,6 +70,7 @@ nav {
   display: flex;
   flex-direction: column;
 }
+
 main {
   flex: 1;
   padding-inline: 1rem;
@@ -113,11 +117,7 @@ form label {
   color: #333;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="search"] {
+.inp {
   margin-left: 0.2rem;
   padding: 0.75rem 1rem;
   border: 1px solid #ccc;
@@ -127,7 +127,7 @@ input[type="search"] {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-input:focus {
+.inp:focus {
   border-color: #007bff;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
 }
@@ -221,6 +221,76 @@ button.secondary:focus {
   font-weight: normal;
 }
 
+.homecontaier {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 20px;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  overflow-x: auto;
+  background-color: #f4f5f7;
+  height: 100%;
+}
+
+.boardcol {
+  flex: 0 0 400px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.boardcol::-webkit-scrollbar {
+  width: 6px;
+}
+.boardcol::-webkit-scrollbar {
+  height: 8px;
+}
+
+.boardcol::-webkit-scrollbar-thumb,
+.boardcol::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.boardheading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #333;
+  padding-bottom: 8px;
+  border-bottom: 2px solid;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+.boardheading.todo {
+  border-bottom-color: #ff6b6b;
+  color: #ff6b6b;
+}
+.boardheading.inprogress {
+  border-bottom-color: #5c7cfa;
+  color: #5c7cfa;
+}
+.boardheading.done {
+  border-bottom-color: #38d9a9;
+  color: #38d9a9;
+}
+
+select {
+  cursor: pointer;
+}
+
+
 @media (max-width: 1300px) {
   nav {
     padding: 1rem 10rem;
@@ -246,7 +316,7 @@ button.secondary:focus {
     padding: 1rem 0;
     display: none;
   }
-
+  
   .navbar-links.active {
     display: flex;
   }
@@ -260,5 +330,107 @@ button.secondary:focus {
   .box {
     min-width: 100%;
     box-sizing: border-box;
+  }
+}
+
+.task-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.task-card:hover {
+  transform: scale(1.02);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.task-priority {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+}
+
+.task-priority.high {
+  background-color: #d62828; 
+}
+
+.task-priority.medium {
+  background-color: #f77f00; 
+}
+
+.task-priority.low {
+  background-color: #43aa8b; 
+}
+
+.task-description {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.task-user{
+  font-family:monospace;
+  font-weight: 700;
+}
+
+.task-status {
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.task-status.todo {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+.task-status.done {
+  background-color: #5c7cfa;
+  color: #fff;
+}
+.task-status.inprogress {
+  background-color: #38d9a9;
+  color: #fff;
+}
+@media (max-width: 500px) {
+  .task-card {
+    padding: 16px;
+  }
+  
+  .task-title {
+    font-size: 1.1rem;
+  }
+  
+
+  .task-description {
+    font-size: 0.9rem;
   }
 }

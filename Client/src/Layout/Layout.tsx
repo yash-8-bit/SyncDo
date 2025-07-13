@@ -6,6 +6,7 @@ function Layout() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const links: NavType[] = [
     { text: "Home", link: "/" },
+    { text: "Add task", link: "/add-task" },
     { text: "Account", link: "/account" },
   ];
   return (
@@ -14,7 +15,7 @@ function Layout() {
         <div className="navbar-logo">
           <Link to="/">Sync Do</Link>
         </div>
-        <div className={`navbar-links ${isOpen ? "active" : ""}`}>
+        <div className={`navbar-links font ${isOpen ? "active" : ""}`}>
           {links.map((item) => (
             <Link key={item.text} to={item.link}>
               {item.text}
