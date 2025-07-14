@@ -1,4 +1,4 @@
-import React, { useState, type FormEvent } from "react";
+import React, { useEffect, useState, type FormEvent } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import type { taskType } from "../types/task.type";
@@ -26,6 +26,7 @@ function Addtask() {
       console.error(error);
     }
   };
+  useEffect(() => {}, []);
   return (
     <div className="center">
       <div className="box">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import type { taskType } from "../types/task.type";
 
 function Card({ task }: { task: taskType }) {

@@ -5,10 +5,12 @@ export interface taskType {
   assignedUser?: string;
   status: string;
   priority: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface taskStatustype {
-  "ToDo": taskType[];
+  ToDo: taskType[];
   "In Progress": taskType[];
-  "Done": taskType[];
+  Done: taskType[];
 }

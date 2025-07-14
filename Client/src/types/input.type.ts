@@ -11,6 +11,6 @@ export interface InputType {
 export interface SelecType {
   heading?: string;
   value: string;
-  options:string[];
+  options: string[];
   onchange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }

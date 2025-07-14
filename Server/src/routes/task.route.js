@@ -5,6 +5,7 @@ const Taskroute = express.Router();
 
 Taskroute.post("/add", verifytoken, task.Add);
 Taskroute.get("/get", verifytoken, task.Get);
+Taskroute.put("/assign/:_id", verifytoken, task.Assign);
 Taskroute.put("/update/:_id", verifytoken, task.Update);
 Taskroute.delete("/delete/:_id", verifytoken, task.Delete);
 

@@ -24,13 +24,18 @@ const addTask = async ({ title, description, status, priority }: taskType) => {
 };
 
 const deleteTask = async (_id: string) => {
-  let response = await Call.delete(`/task/update/${_id}`, config);
+  let response = await Call.delete(`/task/delete/${_id}`, config);
   return response.data;
 };
 
 const updateTask = async (_id: string) => {
-  let response = await Call.put(`/task/delete/${_id}`, config);
+  let response = await Call.put(`/task/update/${_id}`, config);
   return response.data;
 };
 
-export { addTask, deleteTask, updateTask, getTask };
+const assignTask = async (_id: string) => {
+  let response = await Call.put(`/task/assign/${_id}`, config);
+  return response.data;
+};
+
+export { addTask, deleteTask, updateTask, getTask, assignTask };
