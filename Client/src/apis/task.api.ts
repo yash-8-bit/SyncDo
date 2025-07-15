@@ -14,6 +14,11 @@ const getTask = async () => {
   return response.data;
 };
 
+const getoneTask = async (_id: string) => {
+  let response = await Call.get(`/task/getone/${_id}`, config);
+  return response.data;
+};
+
 const addTask = async ({ title, description, status, priority }: taskType) => {
   let response = await Call.post(
     "/task/add",
@@ -28,14 +33,41 @@ const deleteTask = async (_id: string) => {
   return response.data;
 };
 
-const updateTask = async (_id: string) => {
-  let response = await Call.put(`/task/update/${_id}`, config);
+const updateTask = async ({
+  _id,
+  title,
+  description,
+  status,
+  priority,
+}: taskType) => {
+  let response = await Call.put(
+    `/task/update/${_id}`,
+    { title, description, status, priority },
+    config
+  );
   return response.data;
 };
 
 const assignTask = async (_id: string) => {
-  let response = await Call.put(`/task/assign/${_id}`, config);
+  let response = await Call.put(`/task/assign/${_id}`, {}, config);
   return response.data;
 };
 
-export { addTask, deleteTask, updateTask, getTask, assignTask };
+const updateTaskStatus = async ({ _id, status }: taskType) => {
+  let response = await Call.put(
+    `/task/update-status/${_id}`,
+    { status },
+    config
+  );
+  return response.data;
+};
+
+export {
+  addTask,
+  deleteTask,
+  updateTask,
+  getTask,
+  assignTask,
+  getoneTask,
+  updateTaskStatus,
+};

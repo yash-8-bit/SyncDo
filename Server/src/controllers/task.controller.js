@@ -2,6 +2,16 @@ import Logs from "../models/Logs.js";
 import Task from "../models/Task.js";
 import { getio } from "../socketHandler.js";
 import taskfuntion from "../utils/taskfuntion.js";
+
+async function Getone(req, res) {
+  try {
+    const { _id } = req.params;
+    const response = await Task.findById(_id);
+    res.status(200).json({ data: response });
+  } catch (error) {
+    console.log(error);
+  }
+}
 async function Get(req, res) {
   try {
     const status = ["ToDo", "In Progress", "Done"];
@@ -10,7 +20,7 @@ async function Get(req, res) {
     status.forEach((s) => {
       task[s] = response.filter((item) => item.status === s);
     });
-    res.status(200).json({ data: task });
+    res.status(200).json({ data: response });
   } catch (error) {
     console.log(error);
   }
@@ -56,11 +66,12 @@ async function Delete(req, res) {
     const io = getio();
     const time = new Date().toISOString();
     const { _id } = req.params;
+    const username = req.user;
     const deletedtask = await Task.findByIdAndDelete(_id);
     const newlog = new Logs({
       action: "delete",
       time: time,
-      details: `User ${username} deleted the task titled '${title}'.`,
+      details: `User ${username} deleted the task titled '${deletedtask.title}'.`,
     });
     await newlog.save();
     res.status(200).json({ message: "Task Deleted Successfull" });
@@ -76,13 +87,15 @@ async function Update(req, res) {
     const time = new Date().toISOString();
     const { _id } = req.params;
     const username = req.user;
-    const allowedFields = ["title", "description", "status", "priority"];
-    const updatedata = { assignedUser: username, updatedAt: time };
-    allowedFields.forEach((field) => {
-      if (Object.hasOwn(req.body, field)) {
-        updatedata[field] = req.body[field];
-      }
-    });
+    const { title, description, status, priority } = req.body;
+    const updatedata = {
+      assignedUser: username,
+      updatedAt: time,
+      title: title,
+      description: description,
+      status: status,
+      priority: priority,
+    };
     const updatedtask = await Task.findByIdAndUpdate(
       _id,
       { $set: updatedata },
@@ -122,10 +135,36 @@ async function Assign(req, res) {
     });
     await newlog.save();
     res.status(201).json({ message: "Task Assigned Successfull" });
-    io.emit("assignedtask", { updatedtask, newlog });
+    io.emit("updatedtask", { updatedtask, newlog });
   } catch (err) {
     console.error(err);
   }
 }
 
-export default { Add, Delete, Update, Get, Assign };
+async function Updatestatus(req, res) {
+  try {
+    const io = getio();
+    const { _id } = req.params;
+    const username = req.user;
+    const { status } = req.body;
+    const time = new Date().toISOString();
+    const updatedtask = await Task.findByIdAndUpdate(
+      _id,
+      { $set: { status: status, updatedAt: time } },
+      { new: true }
+    );
+    const newlog = new Logs({
+      action: "drag-drop",
+      time: time,
+      details: `User ${username} dragged the task titled 
+      '${updatedtask.title}' to ${updatedtask.status}.`,
+    });
+    await newlog.save();
+    res.status(201).json({ message: "Task Dragged Successfull" });
+    io.emit("updatedtask", { updatedtask, newlog });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export default { Add, Delete, Update, Get, Assign, Getone, Updatestatus };

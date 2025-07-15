@@ -1,23 +1,35 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { Outlet } from "react-router";
 import type { NavType } from "../types/layout.types";
+import ls from "../utils/ls";
 function Layout() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const links: NavType[] = [
     { text: "Home", link: "/" },
     { text: "Add task", link: "/add-task" },
     { text: "Account", link: "/account" },
   ];
+  const run = (): void => {
+    if (!ls.get()) navigate("/account-login");
+  };
+  useEffect(() => {
+    run();
+  }, []);
   return (
     <div className="container">
       <nav>
-        <div className="navbar-logo">
+        <div className="navbar-logo font">
           <Link to="/">Sync Do</Link>
         </div>
         <div className={`navbar-links font ${isOpen ? "active" : ""}`}>
           {links.map((item) => (
-            <Link key={item.text} to={item.link}>
+            <Link
+              onClick={() => setIsOpen(false)}
+              key={item.text}
+              to={item.link}
+            >
               {item.text}
             </Link>
           ))}

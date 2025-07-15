@@ -1,15 +1,16 @@
-import React, { useState, type FormEvent } from "react";
+import React, { useEffect, useState, type FormEvent } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import type { taskType } from "../types/task.type";
 import Select from "../components/Select";
-import { addTask } from "../apis/task.api";
-import { useNavigate } from "react-router";
-import Alert from "../components/Alert";
+import { getoneTask, updateTask } from "../apis/task.api";
+import { useNavigate, useParams } from "react-router";
 import type { AlertType } from "../types/alert.type";
+import Alert from "../components/Alert";
 import Loading from "../components/Loading";
 
-function Addtask() {
+function Updatetask() {
+  const { id } = useParams();
   const navigate = useNavigate();
   const status = ["ToDo", "In Progress", "Done"];
   const priority = ["Low", "Medium", "High"];
@@ -18,16 +19,17 @@ function Addtask() {
     text: "",
   });
   const [formdata, setFormdata] = useState<taskType>({
+    _id: "",
     title: "",
     description: "",
     priority: "Medium",
     status: "ToDo",
   });
-  const Add = async (e: FormEvent<HTMLFormElement>) => {
+  const Update = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       setloading(true);
-      await addTask(formdata);
+      await updateTask(formdata);
       navigate("/");
     } catch (error: any) {
       setloading(false);
@@ -38,14 +40,33 @@ function Addtask() {
       setalert({ text: error.message });
     }
   };
+  const getone = async () => {
+    if (!id) return navigate("/");
+    try {
+      setloading(true);
+      const data = await getoneTask(id);
+      setFormdata(data.data);
+      setloading(false);
+    } catch (error: any) {
+      setloading(false);
+      if (error.response && error.response.data) {
+        setalert({ text: error.response.data.message });
+        return;
+      }
+      setalert({ text: error.message });
+    }
+  };
+  useEffect(() => {
+    getone();
+  }, []);
   return (
     <>
       {loading && <Loading />}
       <div className="center">
         <div className="box">
-          <h1 className="heading font">Add Task</h1>
+          <h1 className="heading font">Update Task</h1>
           {alert.text && <Alert text={alert.text} cname={alert.cname} />}
-          <form onSubmit={Add}>
+          <form onSubmit={Update}>
             <Input
               value={formdata.title}
               heading="Enter title"
@@ -86,4 +107,4 @@ function Addtask() {
   );
 }
 
-export default Addtask;
+export default Updatetask;

@@ -4,6 +4,7 @@ import Authform from "./Pages/Authform";
 import Layout from "./Layout/Layout";
 import Account from "./Pages/Account";
 import Addtask from "./Pages/Addtask";
+import Updatetask from "./Pages/Updatetask";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/account" element={<Account />} />
           <Route path="/add-task" element={<Addtask />} />
+          <Route path="/update-task/:id" element={<Updatetask />} />
         </Route>
       </Routes>
     </BrowserRouter>

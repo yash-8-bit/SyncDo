@@ -3,7 +3,7 @@ import accountsvg from "../assets/account.svg";
 import type { User } from "../types/user.type";
 import ls from "../utils/ls";
 import Button from "../components/Button";
-import { accountDetails } from "../apis/user";
+import { accountDetails } from "../apis/user.api";
 import type { AlertType } from "../types/alert.type";
 import Loading from "../components/Loading";
 import Alert from "../components/Alert";

@@ -1,4 +1,3 @@
-import React from "react";
 import type { SelecType } from "../types/input.type";
 
 function Select({ heading = "", value, onchange, options }: SelecType) {

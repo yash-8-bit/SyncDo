@@ -9,8 +9,9 @@ export interface taskType {
   updatedAt?: Date;
 }
 
-export interface taskStatustype {
-  ToDo: taskType[];
-  "In Progress": taskType[];
-  Done: taskType[];
+export interface taskCardType {
+  task: taskType;
+  assignfunc: (_id: string) => void;
+  updatefunc: (_id: string) => void;
+  deletefunc: (_id: string) => void;
 }
