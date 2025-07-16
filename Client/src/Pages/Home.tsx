@@ -18,7 +18,7 @@ import Button from "../components/Button";
 import { useNavigate } from "react-router";
 
 // home page
-function Home():JSX.Element {
+function Home(): JSX.Element {
   const navigate = useNavigate();
   const [width, setWidth] = useState<number>(window.innerWidth);
   const [show, setshow] = useState<boolean>(false);
@@ -80,7 +80,7 @@ function Home():JSX.Element {
   ) => {
     e.preventDefault();
     try {
-      const d = e.dataTransfer.getData("taskId");
+      const d = e.dataTransfer.getData("_task_data_");
       const data: taskType = JSON.parse(d);
       if (data.status == currentstatus) return;
       data.status = currentstatus;
@@ -90,6 +90,9 @@ function Home():JSX.Element {
     } catch (error: any) {
       handle_error(error);
     }
+  };
+  const gettime = (e: Date) => {
+    return new Date(e).toLocaleString();
   };
   useEffect(() => {
     get();
@@ -127,7 +130,7 @@ function Home():JSX.Element {
       <div className="homecontainer font">
         {(show || width > 768) && (
           <div className="logcontainer">
-             {/* hide logs button */}
+            {/* hide logs button */}
             {width < 100 && (
               <Button
                 func={() => setshow(false)}
@@ -139,7 +142,7 @@ function Home():JSX.Element {
             <ul className="logs">
               {logs.map((item, i) => (
                 <li className="log-paragraph" key={i}>
-                  {item.details}
+                  {item.details} on {gettime(item.time)}.
                 </li>
               ))}
             </ul>

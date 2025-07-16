@@ -54,7 +54,7 @@ async function Add(req, res) {
     const newlog = new Logs({
       action: "add",
       time: time,
-      details: `${username} has added a task with the title '${title}'.`,
+      details: `${username} has added a task with the title '${title}'`,
     });
     await newtask.save();
     await newlog.save();
@@ -76,7 +76,7 @@ async function Delete(req, res) {
     const newlog = new Logs({
       action: "delete",
       time: time,
-      details: `User ${username} deleted the task titled '${deletedtask.title}'.`,
+      details: `User ${username} deleted the task titled '${deletedtask.title}'`,
     });
     await newlog.save();
     res.status(200).json({ message: "Task Deleted Successfull" });
@@ -93,6 +93,11 @@ async function Update(req, res) {
     const time = new Date().toISOString();
     const { _id } = req.params;
     const username = req.user;
+    const task = await Task.findById(_id);
+    if (time == task.updatedAt)
+      return res
+        .status(400)
+        .json({ message: `Already Updated by ${task.assignedUser}` });
     const { title, description, status, priority } = req.body;
     const updatedata = {
       assignedUser: username,
@@ -110,7 +115,7 @@ async function Update(req, res) {
     const newlog = new Logs({
       action: "update",
       time: time,
-      details: `User ${username} updated the task titled '${updatedtask.title}'.`,
+      details: `User ${username} updated the task titled '${updatedtask.title}'`,
     });
     await newlog.save();
     res.status(201).json({ message: "Task Updated Successfull" });
@@ -138,7 +143,7 @@ async function Assign(req, res) {
       action: "assign",
       time: time,
       details: `User ${username} assigned the task titled 
-      '${updatedtask.title}' to ${newusername}.`,
+      '${updatedtask.title}' to ${newusername}`,
     });
     await newlog.save();
     res.status(201).json({ message: "Task Assigned Successfull" });
@@ -165,7 +170,7 @@ async function Updatestatus(req, res) {
       action: "drag-drop",
       time: time,
       details: `User ${username} dragged the task titled 
-      '${updatedtask.title}' to ${updatedtask.status}.`,
+      '${updatedtask.title}' to ${updatedtask.status}`,
     });
     await newlog.save();
     res.status(201).json({ message: "Task Dragged Successfull" });
