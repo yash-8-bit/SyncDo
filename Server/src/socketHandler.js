@@ -6,8 +6,9 @@ let io = null;
 const socketHandler = (server) => {
   io = new Server(server, {
     cors: {
-      origin:process.env.ORIGIN_URL,
+      origin: process.env.ORIGIN_URL,
     },
+    transports: ["websocket"],
   });
   io.on("connection", (socket) => {
     console.info("connected", socket.id);

@@ -1,4 +1,4 @@
-import React, { useState, type FormEvent, type JSX } from "react";
+import { useState, type FormEvent, type JSX } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import type { taskType } from "../types/task.type";
