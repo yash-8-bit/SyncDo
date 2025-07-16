@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent, type JSX } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import type { taskType } from "../types/task.type";
@@ -9,7 +9,9 @@ import type { AlertType } from "../types/alert.type";
 import Alert from "../components/Alert";
 import Loading from "../components/Loading";
 
-function Updatetask() {
+
+// Task update  page
+function Updatetask() :JSX.Element{
   const { id } = useParams();
   const navigate = useNavigate();
   const status = ["ToDo", "In Progress", "Done"];
@@ -25,6 +27,8 @@ function Updatetask() {
     priority: "Medium",
     status: "ToDo",
   });
+
+  // function to update  a task from the API
   const Update = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -40,6 +44,8 @@ function Updatetask() {
       setalert({ text: error.message });
     }
   };
+
+  // function to fetch one task through the API
   const getone = async () => {
     if (!id) return navigate("/");
     try {
@@ -99,6 +105,7 @@ function Updatetask() {
                 setFormdata((old) => ({ ...old, priority: e.target.value }));
               }}
             />
+            {/* task update button */}
             <Button cname="font" type="submit" text="submit" />
           </form>
         </div>

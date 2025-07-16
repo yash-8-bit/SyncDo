@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type JSX } from "react";
 import Input from "../components/Input";
 import type { UserAuthType } from "../types/user.type";
 import Button from "../components/Button";
@@ -10,7 +10,8 @@ import Alert from "../components/Alert";
 import type { AlertType } from "../types/alert.type";
 import Loading from "../components/Loading";
 
-function Authform({ type }: { type: authtype }) {
+// login and register combined page
+function Authform({ type }: { type: authtype }):JSX.Element {
   const navigate = useNavigate();
   const [loading, setloading] = useState<boolean>(false);
   const [alert, setalert] = useState<AlertType>({
@@ -22,6 +23,8 @@ function Authform({ type }: { type: authtype }) {
     username: "",
     password: "",
   });
+
+  // function to log in a user through the API
   const handlelogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -40,6 +43,8 @@ function Authform({ type }: { type: authtype }) {
       setalert({ text: error.message, cname: "error" });
     }
   };
+
+  // function to register a user through the API
   const handleregitser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -93,6 +98,7 @@ function Authform({ type }: { type: authtype }) {
                 setFormdata((old) => ({ ...old, password: e.target.value }));
               }}
             />
+            {/* login or register button */}
             <Button text="Submit" type="submit" />
             {type == "login" ? (
               <p className="auth">

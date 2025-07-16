@@ -1,3 +1,4 @@
+// task interface
 export interface taskType {
   _id?: string;
   title: string;
@@ -9,6 +10,7 @@ export interface taskType {
   updatedAt?: Date;
 }
 
+// task card interface
 export interface taskCardType {
   task: taskType;
   assignfunc: (_id: string) => void;

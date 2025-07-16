@@ -1,6 +1,9 @@
+import type { JSX } from "react";
 import type { SelecType } from "../types/input.type";
 
-function Select({ heading = "", value, onchange, options }: SelecType) {
+
+// Option-Select Input  
+function Select({ heading = "", value, onchange, options }: SelecType):JSX.Element {
   return (
     <div className="form-group">
       <label>{heading}</label>

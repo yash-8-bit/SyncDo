@@ -1,7 +1,8 @@
-import React from "react";
+import  { type JSX } from "react";
 import type { ButtonType } from "../types/button.type";
 
-function Button({ text, type = "button", func = () => {}, cname }: ButtonType) {
+// Button component 
+function Button({ text, type = "button", func = () => {}, cname }: ButtonType):JSX.Element {
   return (
     <button type={type} onClick={func} className={`${cname}`}>
       {text}

@@ -1,5 +1,7 @@
-function smartassign(tasks) {
+// Returns the username with the minimum number of active tasks
+function smartassign(alltasks) {
   let m = {};
+  const tasks = alltasks.filter((item) => item.status !== "Done");
   tasks.forEach((item) => {
     if (m[item.assignedUser]) {
       m[item.assignedUser]++;

@@ -1,6 +1,8 @@
+import type { JSX } from "react";
 import type { AlertType } from "../types/alert.type";
 
-function Alert({ text, cname = "" }: AlertType) {
+// Alert component to show messages and errors
+function Alert({ text, cname = "" }: AlertType):JSX.Element {
   return (
     <p role="alert" className={`alert font ${cname} `}>
       {text}

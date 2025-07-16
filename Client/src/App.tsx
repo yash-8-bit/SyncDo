@@ -6,6 +6,7 @@ import Account from "./Pages/Account";
 import Addtask from "./Pages/Addtask";
 import Updatetask from "./Pages/Updatetask";
 
+// Routing part
 function App() {
   return (
     <BrowserRouter>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, type JSX } from "react";
 import type { taskType } from "../types/task.type";
 import {
   assignTask,
@@ -17,7 +17,8 @@ import type { AlertType } from "../types/alert.type";
 import Button from "../components/Button";
 import { useNavigate } from "react-router";
 
-function Home() {
+// home page
+function Home():JSX.Element {
   const navigate = useNavigate();
   const [width, setWidth] = useState<number>(window.innerWidth);
   const [show, setshow] = useState<boolean>(false);
@@ -36,6 +37,7 @@ function Home() {
     setalert({ text: error.message });
   };
 
+  // function to fetch all tasks and latest 20 logs from the API
   const get = async () => {
     try {
       setloading(true);
@@ -48,6 +50,8 @@ function Home() {
       handle_error(error);
     }
   };
+
+  // function to delete a tasks through the API
   const Delete = async (_id: string) => {
     try {
       setloading(true);
@@ -57,6 +61,8 @@ function Home() {
       handle_error(error);
     }
   };
+
+  // function to smart assign a tasks through the API
   const Assign = async (_id: string) => {
     try {
       setloading(true);
@@ -66,6 +72,8 @@ function Home() {
       handle_error(error);
     }
   };
+
+  // function to handle the drop of  task card and update the status through the API
   const handledrop = async (
     e: React.DragEvent<HTMLDivElement>,
     currentstatus: string
@@ -85,18 +93,26 @@ function Home() {
   };
   useEffect(() => {
     get();
+
+    // live update a task that is added
     socket.on("addedtask", (data) => {
       addtasklive(data.newtask, setTasks);
       setLogs((prevlogs) => [data.newlog, ...prevlogs].slice(0, 20));
     });
+
+    // live update a task that is updated
     socket.on("updatedtask", (data) => {
       updatetasklive(data.updatedtask, setTasks);
       setLogs((prevlogs) => [data.newlog, ...prevlogs].slice(0, 20));
     });
+
+    // live update a task that is deleted
     socket.on("deletedtask", (data) => {
       deletetasklive(data.deletedtask, setTasks);
       setLogs((prevlogs) => [data.newlog, ...prevlogs].slice(0, 20));
     });
+
+    // function to change width
     const handleResize = () => setWidth(window.innerWidth);
 
     window.addEventListener("resize", handleResize);
@@ -111,6 +127,7 @@ function Home() {
       <div className="homecontainer font">
         {(show || width > 768) && (
           <div className="logcontainer">
+             {/* hide logs button */}
             {width < 100 && (
               <Button
                 func={() => setshow(false)}
@@ -128,6 +145,7 @@ function Home() {
             </ul>
           </div>
         )}
+        {/* Show logs button */}
         {width < 768 && (
           <Button
             func={() => setshow(true)}
@@ -135,6 +153,8 @@ function Home() {
             cname="toggle font"
           />
         )}
+
+        {/* main board for show tasks */}
         <div className="board">
           <div
             className="boardcol"

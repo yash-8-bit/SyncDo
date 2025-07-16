@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Schema of Task
 const TaskSchema = new mongoose.Schema(
   {
     title: {

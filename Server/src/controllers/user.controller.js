@@ -1,4 +1,6 @@
 import User from "../models/User.js";
+
+// function to fetch user task details from the database
 async function Details(req, res) {
   try {
     const username = req.user;
@@ -10,6 +12,7 @@ async function Details(req, res) {
   }
 }
 
+// Function to delete a user to the database
 async function Delete(req, res) {
   try {
     const username = req.user;

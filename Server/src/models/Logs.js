@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Schema of logs
 const LogsSchema = new mongoose.Schema({
   action: {
     type: String,

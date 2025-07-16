@@ -1,5 +1,8 @@
+import type { JSX } from "react";
 
-function Loading() {
+
+// Loading component
+function Loading():JSX.Element {
   return (
     <div className="center loading-container">
       <div className="loader"></div>

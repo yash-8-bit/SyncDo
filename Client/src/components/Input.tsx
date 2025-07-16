@@ -1,13 +1,15 @@
-import React from "react";
+import{ type JSX } from "react";
 import type { InputType } from "../types/input.type";
 
+
+// Input component
 function Input({
   heading = "",
   type = "text",
   value,
   placeholder,
   onchange,
-}: InputType) {
+}: InputType):JSX.Element {
   return (
     <div className="form-group">
       <label>{heading}</label>

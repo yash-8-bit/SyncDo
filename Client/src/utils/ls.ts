@@ -1,3 +1,4 @@
+//  Function to save the values in local storage
 class Localstorage {
   private key: string;
   constructor(key: string) {
@@ -15,5 +16,6 @@ class Localstorage {
   }
 }
 
+// token save object
 const ls = new Localstorage("authtoken");
 export default ls;

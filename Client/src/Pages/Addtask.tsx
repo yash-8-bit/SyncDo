@@ -1,4 +1,4 @@
-import React, { useState, type FormEvent } from "react";
+import React, { useState, type FormEvent, type JSX } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import type { taskType } from "../types/task.type";
@@ -9,7 +9,8 @@ import Alert from "../components/Alert";
 import type { AlertType } from "../types/alert.type";
 import Loading from "../components/Loading";
 
-function Addtask() {
+// Add task page
+function Addtask(): JSX.Element {
   const navigate = useNavigate();
   const status = ["ToDo", "In Progress", "Done"];
   const priority = ["Low", "Medium", "High"];
@@ -23,6 +24,8 @@ function Addtask() {
     priority: "Medium",
     status: "ToDo",
   });
+
+  // function to add  a task from the API
   const Add = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -78,6 +81,7 @@ function Addtask() {
                 setFormdata((old) => ({ ...old, priority: e.target.value }));
               }}
             />
+            {/* task add button */}
             <Button cname="font" type="submit" text="submit" />
           </form>
         </div>

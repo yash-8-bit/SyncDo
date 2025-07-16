@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 
+// Function to handle user registration and store data in the database
 async function register(req, res) {
   try {
     const { name, username, password } = req.body;
@@ -25,6 +26,7 @@ async function register(req, res) {
   }
 }
 
+// Function to handle user login and store data in the database
 async function login(req, res) {
   try {
     const { username, password } = req.body;

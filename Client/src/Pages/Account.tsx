@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 import accountsvg from "../assets/account.svg";
 import type { User } from "../types/user.type";
 import ls from "../utils/ls";
@@ -8,7 +8,8 @@ import type { AlertType } from "../types/alert.type";
 import Loading from "../components/Loading";
 import Alert from "../components/Alert";
 
-function Account() {
+// User account page
+function Account() :JSX.Element{
   const [data, setData] = useState<User>({
     name: "",
     username: "",
@@ -17,11 +18,15 @@ function Account() {
   const [alert, setalert] = useState<AlertType>({
     text: "",
   });
+
+  // function for user logout 
   const logout = () => {
     ls.reset();
     location.reload();
   };
   useEffect(() => {
+
+  // function to fetch user details from the API
     const get = async () => {
       try {
         setloading(true);
@@ -51,6 +56,7 @@ function Account() {
           <label htmlFor="email">Username -</label>
           <h3 id="email">{data.username}</h3>
         </div>
+        {/* log out button */}
         <Button func={logout} text="Log Out" cname="secondary" />
       </div>
     </>

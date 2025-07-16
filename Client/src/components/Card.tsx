@@ -1,14 +1,15 @@
-import React from "react";
-import type { taskCardType, taskType } from "../types/task.type";
+import React, { type JSX } from "react";
+import type { taskCardType } from "../types/task.type";
 import Button from "./Button";
-import { useNavigate } from "react-router";
-import { assignTask, deleteTask } from "../apis/task.api";
 
-function Card({ task, assignfunc, deletefunc, updatefunc }: taskCardType) {
-  const navigate = useNavigate();
+
+// Card component for display task with drag and drop feature
+function Card({ task, assignfunc, deletefunc, updatefunc }: taskCardType):JSX.Element {
   const priority = task.priority.toLowerCase();
+
+  // function for enable drag feature
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
-    event.dataTransfer.setData("taskId", JSON.stringify(task));
+    event.dataTransfer.setData("_task_data_", JSON.stringify(task));
     event.dataTransfer.effectAllowed = "move";
   };
   return (
@@ -22,16 +23,19 @@ function Card({ task, assignfunc, deletefunc, updatefunc }: taskCardType) {
         <span className="task-user">{task.assignedUser}</span>
       </div>
       <div className="task-buttons">
-        <Button
+        {/* task smart assign button */}
+      {task.status !== "Done" &&  <Button
           text="Assign"
           func={() => assignfunc(task._id!)}
           cname="task-btn assign"
-        />
+        /> }
+         {/* task update button */}
         <Button
           text="Update"
           func={() => updatefunc(task._id!)}
           cname="task-btn update"
         />
+         {/* task delete button */}
         <Button
           text="Delete"
           func={() => deletefunc(task._id!)}

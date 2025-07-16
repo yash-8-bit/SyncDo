@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 import { Link, useNavigate } from "react-router";
 import { Outlet } from "react-router";
 import type { NavType } from "../types/layout.types";
 import ls from "../utils/ls";
-function Layout() {
+
+// Layout of Website include Navbar and Pages in main tag
+function Layout():JSX.Element {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const links: NavType[] = [

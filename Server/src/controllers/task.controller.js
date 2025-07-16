@@ -3,6 +3,7 @@ import Task from "../models/Task.js";
 import { getio } from "../socketHandler.js";
 import taskfuntion from "../utils/taskfuntion.js";
 
+// Function to fetch a single task from the database
 async function Getone(req, res) {
   try {
     const { _id } = req.params;
@@ -12,6 +13,8 @@ async function Getone(req, res) {
     console.log(error);
   }
 }
+
+// Function to fetch all task from the database
 async function Get(req, res) {
   try {
     const status = ["ToDo", "In Progress", "Done"];
@@ -26,6 +29,7 @@ async function Get(req, res) {
   }
 }
 
+// Function to add a task to the database
 async function Add(req, res) {
   try {
     const io = getio();
@@ -61,6 +65,7 @@ async function Add(req, res) {
   }
 }
 
+// Function to delete a task to the database
 async function Delete(req, res) {
   try {
     const io = getio();
@@ -81,6 +86,7 @@ async function Delete(req, res) {
   }
 }
 
+// Function to update a task to the database
 async function Update(req, res) {
   try {
     const io = getio();
@@ -114,6 +120,7 @@ async function Update(req, res) {
   }
 }
 
+// Function to assign a task to a user and save it in the database
 async function Assign(req, res) {
   try {
     const io = getio();
@@ -141,6 +148,7 @@ async function Assign(req, res) {
   }
 }
 
+// Function to assign a task to a user and save it in the database
 async function Updatestatus(req, res) {
   try {
     const io = getio();
