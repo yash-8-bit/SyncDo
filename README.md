@@ -129,3 +129,9 @@ The app features a **smart assignment system** designed to balance the workload 
 * Tasks store the assigned username along with their status, keeping the UI and backend perfectly synchronized. 🔄
 
 ---
+
+## Live Demo 
+
+* **Live App:** [sync-do.vercel.app](https://sync-do.vercel.app)
+
+---
